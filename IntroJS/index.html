@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title> Simple to do list in JS </title>
+  <title> Simple to do list </title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 
@@ -12,14 +12,15 @@
   <div id="app">
     <div>
       <label for="task"> To do list </label>
-      <input type="text" id="task" placeholder="Add a new task. Ex: Code in VueJS" />
-      <button> Add task </button>
+      <input v-model="taskInput" id="task" placeholder="Add a new task. Ex: Code in VueJS" type="text" />
+      <button v-on:click="addTask"> Add task </button>
     </div>
     <ul>
-
+      <li v-for="task in tasks"> {{ task }} </li>
     </ul>
   </div>
 
+  <script src="https://unpkg.com/vue@next"></script>
   <script src="app.js"></script>
 </body>
 

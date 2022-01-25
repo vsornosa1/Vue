@@ -18,7 +18,13 @@ const app = Vue.createApp({
     },
     resetInput() {
       this.name = '';
-    }
+    },
+    outputFullName() {
+      if(this.name === '') {
+        return 'Please use a valid name above...';
+      }
+      return 'Your name: ' + this.name + ' Sornosa';
+    } 
   }
 });
 

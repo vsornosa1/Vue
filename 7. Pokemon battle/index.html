@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> Vue Project </title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/vue@next" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1> Pokemon battle </h1>
+    </header>
+    <div id="game">
+      <section id="pokemon" class="container">
+        <h2> Garchomp health [{{ pokemonHealth }}/100] </h2>
+        <div class="healthbar">
+          <div class="healthbar__value" :style="pokemonBarStyles"></div>
+        </div>
+        <img src="./garchomp.png" alt="garchomp">
+      </section>
+      <section id="player" class="container">
+        <h2> Your health [{{ playerHealth }}/100] </h2>
+        <div class="healthbar">
+          <div class="healthbar__value" :style="playerBarStyles"></div>
+        </div>
+        <div>
+          <img class="ash" src="./ash.png" alt="ash">
+          <img class="pikachu" src="./pikachu.png" alt="pikachu">
+        </div>
+        
+      </section>
+      <section class="container" v-if="winner">
+        <h2> Game over! </h2>
+        <h3 v-if="winner === 'pokemon'"> You lost! </h3>
+        <h3 v-else-if="winner === 'player'"> You won! </h3>
+        <h3 v-else> It's a draw! </h3>
+      </section>
+      <section id="controls" v-else>
+        <button @click="attackPokemon"> ATTACK </button>
+        <button :disabled="specialAttackAllowed" @click="specialAttackPokemon"> SPECIAL ATTACK </button>
+        <button @click="healPlayer"> HEAL </button>
+        <button @click="surrender"> SURRENDER </button>
+      </section>
+      <section id="controls">
+        <button class="restore" @click="restoreAllValues"> {{ resetMsg }} </button>
+      </section>
+      <section id="log" class="container">
+        <h2> Battle log </h2>
+        <ul>
+          <li v-for="logMessage in logMessages">
+            <span :class="{'log--player': logMessage.actionBy === 'player', 'log--pokemon': logMessage.actionBy === 'pokemon'}">
+              {{ logMessage.actionBy === 'player' ? 'Your Pikachu' : 'Enemy Garchomp' }}
+            </span>
+            <span v-if="logMessage.actionType === 'heal'">
+              heals himself for
+              <span class="log--heal">{{ logMessage.actionValue }} HP </span>
+            </span>
+            <span v-else>
+              attacks and deals
+              <span class="log--damage">{{ logMessage.actionValue }} HP </span> 
+            </span>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </body>
+</html>

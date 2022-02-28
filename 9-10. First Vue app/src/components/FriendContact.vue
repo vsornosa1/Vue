@@ -13,6 +13,7 @@
                 {{ emailAddress }} 
             </li>
         </ul>
+        <button @click="deleteFriend"> Delete </button>
     </li>
 </template>
 
@@ -51,7 +52,14 @@
                     return false;
                 }
             },
-
+            'delete': function(id) {
+                if(id) {
+                    return true;
+                } else {
+                    console.warn('Id is missing!');
+                    return false;
+                }
+            }
         },
         data() {
             return {
@@ -64,6 +72,9 @@
             },
             toggleFavourite() {
                 this.$emit('toggle-favourite', this.id); // Emitting custom events (Child -> Parent) with custom data (id)
+            },
+            deleteFriend() {
+                this.$emit('delete', this.id);
             }
         }
     };

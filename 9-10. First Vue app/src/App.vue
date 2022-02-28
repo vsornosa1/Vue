@@ -15,6 +15,7 @@
                 :phone-number="friend.phone"
                 :email-address="friend.email"
                 :is-favourite="friend.isFavourite"
+                @delete="deleteContact"
                 @toggle-favourite="toggleFavouriteStatus"> <!--Listens to child event (toggle-favourite) -->
             </friend-contact>
         </ul>
@@ -61,6 +62,10 @@ import NewFriend from './components/NewFriend.vue';
                     isFavourite: false
                 }
                 this.friends.push(newFriendContact);
+            },
+            deleteContact(friendId) {
+                // Returns the friends array based on the fucntion condition
+                this.friends = this.friends.filter(friend => friend.id !== friendId);
             }
         }
     }

@@ -1,10 +1,10 @@
 <template>
   <header>
-    <h1>More on Vue Components</h1>
+    <h1> More on Vue Components </h1>
   </header>
 </template>
 
-<style>
+<style scoped>
   header {
     width: 100%;
     height: 5rem;
